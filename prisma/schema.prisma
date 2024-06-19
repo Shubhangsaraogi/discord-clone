@@ -9,11 +9,11 @@ datasource db {
 }
 
 model Profile {
-  id String @id @default(uuid())
+  id String @id @default(uuid()) @map("_id")
   userId String @unique
   name String
-  imageUrl String @db.Text
-  email String @db.Text
+  imageUrl String 
+  email String 
 
   servers Server[]
   members Member[]
@@ -100,7 +100,7 @@ model Message {
   id String @id @default(uuid()) @map("_id")
   content String 
 
-  fileUrl String
+  fileUrl String?
 
   memberId String
   member Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
@@ -136,7 +136,8 @@ model Conversation {
 model DirectMessage {
   id String @id @default(uuid()) @map("_id")
   content String 
-  fileUrl String
+  fileUrl String?
+
   memberId String
   member Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
 
